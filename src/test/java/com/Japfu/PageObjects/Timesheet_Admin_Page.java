@@ -38,11 +38,12 @@ public class Timesheet_Admin_Page {
 	private By featureTimesheetErrorMsg = By.xpath("//div[text()='Not allowed to approve future timesheets']");
 	private By approvedTimesheetpopup = By.xpath("//div[text()='Timesheet Approved!']");
 	private By svgCloseBtn = By.xpath("//*[local-name()='svg' and @data-testid='CloseIcon']//*[local-name()='path']");
+	private By okButton = By.xpath("//button[text()='OK']");
 
 	private By placementFieldValue = By.xpath("//label[text()='Select Placement ID']/following-sibling::div/input");
 //	private By selectPlacement = By.xpath("//div[text()='Not allowed to approve future timesheets']");
 //	private By placementID = By.xpath("//div[text()='Timesheet Approved!']");
-	private By UpdatedDOB = By.xpath("//input[@placeholder='MM/DD/YYYY']");
+	private By UpdatedStartDate = By.xpath("//input[@placeholder='MM/DD/YYYY']");
 
 
 
@@ -94,13 +95,23 @@ public class Timesheet_Admin_Page {
 			}
 			catch(Exception e)
 			{
-			clickElement(UpdatedDOB);
+			clickElement(UpdatedStartDate);
 			WebUI.sendKeys_perform(Keys.ENTER);
 			sleep(2);
-			String datevalue = getAttributeElement(UpdatedDOB, "value");
-			System.out.println("Date of Birth = "+datevalue);
+			
+			String datevalue = getAttributeElement(UpdatedStartDate, "value");
+			System.out.println("Start Date = "+datevalue);
 			sleep(1.5);
-			System.out.println("Differen Xpath came for Start Date Calender");
+			try {
+				clickElement(okButton);
+				}
+				
+				catch(Exception ex)
+				{
+					System.out.println("*******No Ok button Pop up came***********");
+
+				}
+		//	System.out.println("Differen Xpath came for Start Date Calender");
 			}
 			sleep(1);
 			clickElement(nextIcon);
@@ -128,13 +139,22 @@ public class Timesheet_Admin_Page {
 					}
 					catch(Exception e)
 					{
-					clickElement(UpdatedDOB);
+					clickElement(UpdatedStartDate);
 					WebUI.sendKeys_perform(Keys.ENTER);
 					sleep(2);
-					String datevalue = getAttributeElement(UpdatedDOB, "value");
-					System.out.println("Date of Birth = "+datevalue);
+					String datevalue = getAttributeElement(UpdatedStartDate, "value");
+					System.out.println("Start Date = "+datevalue);
 					sleep(1.5);
-					System.out.println("Differen Xpath came for Start Date Calender");
+					try {
+						clickElement(okButton);
+						}
+						
+						catch(Exception ex)
+						{
+							System.out.println("*******No Ok button Pop up came***********");
+
+						}
+				//	System.out.println("Differen Xpath came for Start Date Calender");
 					}
 					sleep(2);
 				}
