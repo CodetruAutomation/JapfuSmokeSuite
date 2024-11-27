@@ -30,7 +30,7 @@ public class Employee_Onboard_Contractor_Page extends CommonPageCICA{
 	//	private By dOByear1998 = By.xpath("//button[.='1998']");
 	//	private By dOBDate1 = By.xpath("//button[.='1']");
 
-	private By dobInput = By.xpath("//div/label[text()='Date of Birth']/following-sibling::div/input");	
+	//private By dobInput = By.xpath("//div/label[text()='Date of Birth']/following-sibling::div/input");	
 
 	private By gender = By.xpath("//label[.='Gender']/following-sibling::div/input[@role='combobox']");
 	private By genderValue = By.xpath("//li[.='Male']");
@@ -218,11 +218,45 @@ public class Employee_Onboard_Contractor_Page extends CommonPageCICA{
 		sleep(0.5);
 
 
-		clickElement(dobInput);
-		sleep(1);
-		setText(dobInput, DataGenerateUtils.randomDateOfBirthMMDDYYYY());
-		sleep(0.5);
+//		clickElement(dobInput);
+//		sleep(1);
+//		setText(dobInput, DataGenerateUtils.randomDateOfBirthMMDDYYYY());
+//		sleep(0.5);
+		try {
+			DriverManager.getDriver().findElement(joiningCalander).isDisplayed();
+			clickElement(joiningCalander);
+			sleep(1);
+			
+			clickElement(leftArrow);
+			sleep(0.5);
+			clickElement(leftArrow);
+			sleep(0.5);
+			clickElement(joiningDate1);
+        }
+		catch(Exception e) {
 
+		clickElement(UpdatedDOB);
+		sleep(2);
+		clickElement(leftArrow);
+		sleep(0.5);
+		clickElement(leftArrow);
+		sleep(0.5);
+		clickElement(joiningDate1);
+		WebUI.sendKeys_perform(Keys.ENTER);
+		sleep(2);
+		String datevalue = getAttributeElement(UpdatedDOB, "value");
+		System.out.println("Date of Birth = "+datevalue);
+		sleep(1.5);
+		try {
+		clickElement(okButton);
+		}
+		
+		catch(Exception ex)
+		{
+			System.out.println("*******No Ok button Pop up came***********");
+
+		}
+		}
 		clickElement(gender);
 		sleep(0.5);
 
