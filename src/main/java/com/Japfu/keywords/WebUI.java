@@ -1996,18 +1996,30 @@ public class WebUI {
 	 * @return true/false
 	 */
 	@Step("Verify element visible {0}")
-	public static boolean isElementVisible(By by, int timeout) {
-		smartWait();
-
-		try {
-			WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
-			wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-			LogUtils.info("Verify element visible " + by);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+//	public static boolean isElementVisible(By by, int timeout) {
+//		smartWait();
+//
+//		try {
+//			WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+//			LogUtils.info("Verify element visible " + by);
+//			return true;
+//		} catch (Exception e) {
+//			return false;
+//		}
+//	}
+	public static boolean isElementVisible(By by, int timeoutInSeconds) {
+	    try {
+	        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeoutInSeconds), Duration.ofMillis(500));
+	        // Waits for the element to be visible
+	        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+	        return true;
+	    } catch (Exception e) {
+	        LogUtils.warn("Element is not visible: " + by.toString());
+	        return false;
+	    }
 	}
+
 
 	/**
 	 * Verify if the given web element is visible.

@@ -1,12 +1,16 @@
 package com.Japfu.PageObjects;
 
 import static com.Japfu.keywords.WebUI.*;
+
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.Japfu.driver.DriverManager;
-import com.Japfu.keywords.WebUI;
 
 public class Timesheet_Admin_Page {
 
@@ -38,13 +42,11 @@ public class Timesheet_Admin_Page {
 	private By featureTimesheetErrorMsg = By.xpath("//div[text()='Not allowed to approve future timesheets']");
 	private By approvedTimesheetpopup = By.xpath("//div[text()='Timesheet Approved!']");
 	private By svgCloseBtn = By.xpath("//*[local-name()='svg' and @data-testid='CloseIcon']//*[local-name()='path']");
-	private By okButton = By.xpath("//button[text()='OK']");
-	private By RightArrow = By.xpath("//*[local-name()='svg' and @data-testid='ArrowRightIcon']");
+	private By UpdatedDOB = By.xpath("//input[@placeholder='MM/DD/YYYY']");
+
 	private By placementFieldValue = By.xpath("//label[text()='Select Placement ID']/following-sibling::div/input");
 //	private By selectPlacement = By.xpath("//div[text()='Not allowed to approve future timesheets']");
 //	private By placementID = By.xpath("//div[text()='Timesheet Approved!']");
-	private By UpdatedStartDate = By.xpath("//input[@placeholder='MM/DD/YYYY']");
-	private By date1 = By.xpath("//button[text()='1']");
 
 
 
@@ -85,120 +87,95 @@ public class Timesheet_Admin_Page {
 	}
 
 	public void add_New_Future_Timesheet() {
+	    boolean shouldBreak = false;
 
-		boolean shouldBreak = false;
+	    for (int i = 0; i <= 10; i++) {
+	        sleep(2);
 
-		for (int i = 0; i <= 10; i++) {
-			sleep(2);
-			try {
-				DriverManager.getDriver().findElement(calenderBtn).isDisplayed();
-			clickElement(calenderBtn);
-			}
-			catch(Exception e)
-			{
-			clickElement(UpdatedStartDate);
-		//	WebUI.sendKeys_perform(Keys.ENTER);
-			sleep(1);
-			
-			clickElement(RightArrow);
-			sleep(0.5);
-			clickElement(RightArrow);
-			sleep(0.5);
-			clickElement(date1);
-			sleep(2);
-			
-			String datevalue = getAttributeElement(UpdatedStartDate, "value");
-			System.out.println("Start Date = "+datevalue);
-			sleep(1.5);
-			try {
-				clickElement(okButton);
-				}
-				
-				catch(Exception ex)
-				{
-					System.out.println("*******No Ok button Pop up came***********");
+	        // Check which calendar button is visible and click it
+	        if (isElementVisible(calenderBtn)) {
+	            clickElement(calenderBtn);
+	        } else if (isElementVisible(UpdatedDOB)) {
+	            clickElement(UpdatedDOB);
+	        } else {
+	            System.out.println("No calendar button is visible. Exiting loop.");
+	            break; // Exit if neither button is visible
+	        }
 
-				}
-		//	System.out.println("Differen Xpath came for Start Date Calender");
-			}
-			sleep(1);
-			clickElement(nextIcon);
-			for (int j = 1; j <= 4; j++) {
-				if (shouldBreak) break;  
+	        sleep(1);
+	        clickElement(nextIcon);
 
-				sleep(1);
-				int number = 1;
-				int xp;
-				if (j == 1) {
-					xp = number;
-				} else if (j == 2) {
-					xp = number + 7;
-				} else if (j == 3) {
-					xp = number + 14;
-				} else {
-					xp = number + 21;
-				}
+	        for (int j = 1; j <= 4; j++) {
+	            if (shouldBreak) break;
 
-				sleep(1);
-				if (j!= 1) {
-					try {
-						DriverManager.getDriver().findElement(calenderBtn).isDisplayed();
-					clickElement(calenderBtn);
-					}
-					catch(Exception e)
-					{
-					clickElement(UpdatedStartDate);
-					sleep(1);
-					clickElement(RightArrow);
-					sleep(0.5);
-					clickElement(RightArrow);
-					sleep(0.5);
-					clickElement(date1);
-					sleep(2);
-					WebUI.sendKeys_perform(Keys.ENTER);
-					sleep(2);
-					String datevalue = getAttributeElement(UpdatedStartDate, "value");
-					System.out.println("Start Date = "+datevalue);
-					sleep(1.5);
-					try {
-						clickElement(okButton);
-						}
-						
-						catch(Exception ex)
-						{
-							System.out.println("*******No Ok button Pop up came***********");
+	            sleep(1);
+	            int dateToSelect = 1 + (j - 1) * 7; // Calculate date based on the week
 
-						}
-				//	System.out.println("Differen Xpath came for Start Date Calender");
-					}
-					sleep(2);
-				}
+	            // Re-click the calendar button for weeks beyond the first
+	            if (j != 1) {
+	                if (isElementVisible(calenderBtn)) {
+	                    clickElement(calenderBtn);
+	                } else if (isElementVisible(UpdatedDOB)) {
+	                    clickElement(UpdatedDOB);
+	                } else {
+	                    System.out.println("No calendar button is visible during re-selection. Exiting loop.");
+	                    break;
+	                }
+	                sleep(2);
+	            }
 
-				WebElement data1 = DriverManager.getDriver().findElement(By.xpath("//button[text()='" + xp + "']"));
-				System.out.println("The value of the xpath is -" + xp);
-				data1.click();
-				sleep(1);
+	            // Try selecting the date
+	            try {
+	                WebElement dateElement = DriverManager.getDriver().findElement(By.xpath("//button[text()='" + dateToSelect + "']"));
+	                System.out.println("Selecting date: " + dateToSelect);
+	                dateElement.click();
+	            } catch (Exception e) {
+	                System.out.println("Date not found: " + dateToSelect);
+	                continue; // Skip to the next iteration if date selection fails
+	            }
 
-				if (DriverManager.getDriver().findElement(timesheetExistsPopup).isDisplayed()) {
-					sleep(2);
-					clickElement(cancelButton);
-					sleep(2);
-					clickElement(submitButton);
-					sleep(1);
-					clickElement(closeBtn);
-					sleep(1);
-				} else {
-					clickElement(submitButton);
-					sleep(1);
-					clickElement(doneBtn);
-					shouldBreak = true;  
-					break;
-				}
-			}
-			if (shouldBreak) break;  
-		}
+	            sleep(1);
+
+	            // Handle popups and proceed accordingly
+	            try {
+	                if (DriverManager.getDriver().findElement(timesheetExistsPopup).isDisplayed()) {
+	                    sleep(2);
+	                    clickElement(cancelButton);
+	                    sleep(2);
+	                    clickElement(submitButton);
+	                    sleep(1);
+	                    clickElement(closeBtn);
+	                    sleep(1);
+	                } else {
+	                    clickElement(submitButton);
+	                    sleep(1);
+	                    clickElement(doneBtn);
+	                    shouldBreak = true;
+	                    break;
+	                }
+	            } catch (Exception e) {
+	                System.out.println("No popup detected. Proceeding with submission.");
+	                clickElement(submitButton);
+	                sleep(1);
+	                clickElement(doneBtn);
+	                shouldBreak = true;
+	                break;
+	            }
+	        }
+
+	        if (shouldBreak) break;
+	    }
 	}
-
+	private boolean isElementVisible(By by) {
+	    try {
+	        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(2), Duration.ofMillis(500));
+	        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+	        return true;
+	    } catch (Exception e) {
+	        System.out.println("Element not visible: " + by.toString());
+	        return false;
+	    }
+	}
 	public void submit_Timesheet() {
 		sleep(2);
 		clickElement(viewBtn);
