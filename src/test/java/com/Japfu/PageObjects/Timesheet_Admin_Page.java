@@ -1,14 +1,9 @@
 package com.Japfu.PageObjects;
 
 import static com.Japfu.keywords.WebUI.*;
-
-import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.Japfu.driver.DriverManager;
 
@@ -87,95 +82,61 @@ public class Timesheet_Admin_Page {
 	}
 
 	public void add_New_Future_Timesheet() {
-	    boolean shouldBreak = false;
 
-	    for (int i = 0; i <= 10; i++) {
-	        sleep(2);
+		boolean shouldBreak = false;
 
-	        // Check which calendar button is visible and click it
-	        if (isElementVisible(calenderBtn)) {
-	            clickElement(calenderBtn);
-	        } else if (isElementVisible(UpdatedDOB)) {
-	            clickElement(UpdatedDOB);
-	        } else {
-	            System.out.println("No calendar button is visible. Exiting loop.");
-	            break; // Exit if neither button is visible
-	        }
+		for (int i = 0; i <= 10; i++) {
+			sleep(2);
+			clickElement(UpdatedDOB);
+			sleep(1);
+			clickElement(nextIcon);
+			for (int j = 1; j <= 4; j++) {
+				if (shouldBreak) break;  
 
-	        sleep(1);
-	        clickElement(nextIcon);
+				sleep(1);
+				int number = 1;
+				int xp;
+				if (j == 1) {
+					xp = number;
+				} else if (j == 2) {
+					xp = number + 7;
+				} else if (j == 3) {
+					xp = number + 14;
+				} else {
+					xp = number + 21;
+				}
 
-	        for (int j = 1; j <= 4; j++) {
-	            if (shouldBreak) break;
+				sleep(1);
+				if (j!= 1) {
+					clickElement(UpdatedDOB);
+					sleep(2);
+				}
 
-	            sleep(1);
-	            int dateToSelect = 1 + (j - 1) * 7; // Calculate date based on the week
+				WebElement data1 = DriverManager.getDriver().findElement(By.xpath("//button[text()='" + xp + "']"));
+				System.out.println("The value of the xpath is -" + xp);
+				data1.click();
+				sleep(1);
 
-	            // Re-click the calendar button for weeks beyond the first
-	            if (j != 1) {
-	                if (isElementVisible(calenderBtn)) {
-	                    clickElement(calenderBtn);
-	                } else if (isElementVisible(UpdatedDOB)) {
-	                    clickElement(UpdatedDOB);
-	                } else {
-	                    System.out.println("No calendar button is visible during re-selection. Exiting loop.");
-	                    break;
-	                }
-	                sleep(2);
-	            }
-
-	            // Try selecting the date
-	            try {
-	                WebElement dateElement = DriverManager.getDriver().findElement(By.xpath("//button[text()='" + dateToSelect + "']"));
-	                System.out.println("Selecting date: " + dateToSelect);
-	                dateElement.click();
-	            } catch (Exception e) {
-	                System.out.println("Date not found: " + dateToSelect);
-	                continue; // Skip to the next iteration if date selection fails
-	            }
-
-	            sleep(1);
-
-	            // Handle popups and proceed accordingly
-	            try {
-	                if (DriverManager.getDriver().findElement(timesheetExistsPopup).isDisplayed()) {
-	                    sleep(2);
-	                    clickElement(cancelButton);
-	                    sleep(2);
-	                    clickElement(submitButton);
-	                    sleep(1);
-	                    clickElement(closeBtn);
-	                    sleep(1);
-	                } else {
-	                    clickElement(submitButton);
-	                    sleep(1);
-	                    clickElement(doneBtn);
-	                    shouldBreak = true;
-	                    break;
-	                }
-	            } catch (Exception e) {
-	                System.out.println("No popup detected. Proceeding with submission.");
-	                clickElement(submitButton);
-	                sleep(1);
-	                clickElement(doneBtn);
-	                shouldBreak = true;
-	                break;
-	            }
-	        }
-
-	        if (shouldBreak) break;
-	    }
+				if (DriverManager.getDriver().findElement(timesheetExistsPopup).isDisplayed()) {
+					sleep(2);
+					clickElement(cancelButton);
+					sleep(2);
+					clickElement(submitButton);
+					sleep(1);
+					clickElement(closeBtn);
+					sleep(1);
+				} else {
+					clickElement(submitButton);
+					sleep(1);
+					clickElement(doneBtn);
+					shouldBreak = true;  
+					break;
+				}
+			}
+			if (shouldBreak) break;  
+		}
 	}
-	private boolean isElementVisible(By by) {
-	    try {
-	        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(2), Duration.ofMillis(500));
-	        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-	        return true;
-	    } catch (Exception e) {
-	        System.out.println("Element not visible: " + by.toString());
-	        return false;
-	    }
-	}
+
 	public void submit_Timesheet() {
 		sleep(2);
 		clickElement(viewBtn);
