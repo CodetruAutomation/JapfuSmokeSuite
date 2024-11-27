@@ -6,6 +6,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import com.Japfu.driver.DriverManager;
+import com.Japfu.keywords.WebUI;
 
 public class Timesheet_Admin_Page {
 
@@ -94,6 +95,11 @@ public class Timesheet_Admin_Page {
 			catch(Exception e)
 			{
 			clickElement(UpdatedDOB);
+			WebUI.sendKeys_perform(Keys.ENTER);
+			sleep(2);
+			String datevalue = getAttributeElement(UpdatedDOB, "value");
+			System.out.println("Date of Birth = "+datevalue);
+			sleep(1.5);
 			System.out.println("Differen Xpath came for Start Date Calender");
 			}
 			sleep(1);
@@ -123,6 +129,11 @@ public class Timesheet_Admin_Page {
 					catch(Exception e)
 					{
 					clickElement(UpdatedDOB);
+					WebUI.sendKeys_perform(Keys.ENTER);
+					sleep(2);
+					String datevalue = getAttributeElement(UpdatedDOB, "value");
+					System.out.println("Date of Birth = "+datevalue);
+					sleep(1.5);
 					System.out.println("Differen Xpath came for Start Date Calender");
 					}
 					sleep(2);
