@@ -160,16 +160,25 @@ public class Placement_Page extends CommonPageCICA {
 				clickElement(leftArrow);
 				sleep(0.5);
 				clickElement(date1);
+				try {
+					clickElement(okButton);
+					}
+					
+					catch(Exception ex)
+					{
+						System.out.println("*******No Ok button Pop up came***********");
+
+					}
 	        }
 			catch(Exception e) {
 
 			clickElement(UpdatedDOB);
-			sleep(2);
-			clickElement(leftArrow);
-			sleep(0.5);
-			clickElement(leftArrow);
-			sleep(0.5);
-			clickElement(date1);
+//			sleep(2);
+//			clickElement(leftArrow);
+//			sleep(0.5);
+//			clickElement(leftArrow);
+//			sleep(0.5);
+//			clickElement(date1);
 			WebUI.sendKeys_perform(Keys.ENTER);
 			sleep(2);
 			String datevalue = getAttributeElement(UpdatedDOB, "value");
