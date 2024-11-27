@@ -41,6 +41,7 @@ public class Timesheet_Admin_Page {
 	private By placementFieldValue = By.xpath("//label[text()='Select Placement ID']/following-sibling::div/input");
 //	private By selectPlacement = By.xpath("//div[text()='Not allowed to approve future timesheets']");
 //	private By placementID = By.xpath("//div[text()='Timesheet Approved!']");
+	private By UpdatedDOB = By.xpath("//input[@placeholder='MM/DD/YYYY']");
 
 
 
@@ -86,7 +87,15 @@ public class Timesheet_Admin_Page {
 
 		for (int i = 0; i <= 10; i++) {
 			sleep(2);
+			try {
+				DriverManager.getDriver().findElement(calenderBtn).isDisplayed();
 			clickElement(calenderBtn);
+			}
+			catch(Exception e)
+			{
+			clickElement(UpdatedDOB);
+			System.out.println("Differen Xpath came for Start Date Calender");
+			}
 			sleep(1);
 			clickElement(nextIcon);
 			for (int j = 1; j <= 4; j++) {
@@ -107,7 +116,15 @@ public class Timesheet_Admin_Page {
 
 				sleep(1);
 				if (j!= 1) {
+					try {
+						DriverManager.getDriver().findElement(calenderBtn).isDisplayed();
 					clickElement(calenderBtn);
+					}
+					catch(Exception e)
+					{
+					clickElement(UpdatedDOB);
+					System.out.println("Differen Xpath came for Start Date Calender");
+					}
 					sleep(2);
 				}
 
