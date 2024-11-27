@@ -27,9 +27,15 @@ public class Placement_Page extends CommonPageCICA {
 	private By billRate = By.name("bill_rate");
 	//	private By otBillRate = By.name("ot_bill_rate");
 
+	private By joiningCalander = By.xpath("//button[@aria-label='Choose date']//*[local-name()='svg']");
+	private By leftArrow = By.xpath("//*[local-name()='svg' and @data-testid='ArrowLeftIcon']");
+	private By date1 = By.xpath("//button[text()='1']");
+	private By okButton = By.xpath("//button[text()='OK']");
+	private By UpdatedDOB = By.xpath("//input[@placeholder='MM/DD/YYYY']");
+
 	private By startDateInput = By.xpath("//input[@placeholder='MM/DD/YYYY']");
 	private By startDate = By.xpath("//button[@aria-label='Choose date']");
-	private By date1 = By.xpath("//button[.='1']");
+//	private By date1 = By.xpath("//button[.='1']");
 
 	private By continueButton = By.xpath("//button[contains(text(),'Continue')]");
 
@@ -69,7 +75,7 @@ public class Placement_Page extends CommonPageCICA {
 
 	private By logo = By.xpath("//img[@alt='Logo']");
 
-	private By leftArrow = By.xpath("//*[local-name()='svg' and @data-testid='ArrowLeftIcon']");
+	//private By leftArrow = By.xpath("//*[local-name()='svg' and @data-testid='ArrowLeftIcon']");
 
 	private By clientsList = By.xpath("//ul[@role='listbox']/li");
 
@@ -132,18 +138,53 @@ public class Placement_Page extends CommonPageCICA {
 
 //			DriverManager.getDriver().findElement(startDateInput).sendKeys(Keys.chord(Keys.CONTROL,"A"));
 //			DriverManager.getDriver().findElement(startDateInput).sendKeys(Keys.chord(Keys.BACK_SPACE));
-			sleep(0.5);
-			clickElement(startDate);
-			sleep(1.5);
+	//		sleep(0.5);
+//			clickElement(startDate);
+	//		sleep(1.5);
 		//	setText(startDate, "11262024");
 //			clickElement(leftArrow);
 //			sleep(0.5);
 //			clickElement(date1);
+//			WebUI.sendKeys_perform(Keys.ENTER);
+//			sleep(2);
+//			String datevalue = getAttributeElement(startDateInput, "value");
+//			System.out.println("Date of Birth = "+datevalue);
+//			sleep(2);
+			try {
+				DriverManager.getDriver().findElement(joiningCalander).isDisplayed();
+				clickElement(joiningCalander);
+				sleep(1);
+				
+				clickElement(leftArrow);
+				sleep(0.5);
+				clickElement(leftArrow);
+				sleep(0.5);
+				clickElement(date1);
+	        }
+			catch(Exception e) {
+
+			clickElement(UpdatedDOB);
+			sleep(2);
+			clickElement(leftArrow);
+			sleep(0.5);
+			clickElement(leftArrow);
+			sleep(0.5);
+			clickElement(date1);
 			WebUI.sendKeys_perform(Keys.ENTER);
 			sleep(2);
-			String datevalue = getAttributeElement(startDateInput, "value");
+			String datevalue = getAttributeElement(UpdatedDOB, "value");
 			System.out.println("Date of Birth = "+datevalue);
-			sleep(2);
+			sleep(1.5);
+			try {
+			clickElement(okButton);
+			}
+			
+			catch(Exception ex)
+			{
+				System.out.println("*******No Ok button Pop up came***********");
+
+			}
+			}
 			WebUI.scrollToElementAtBottom(continueButton);
 			sleep(0.5);
 			clickElement(continueButton);
