@@ -25,7 +25,8 @@ public final class FrameworkConstants {
     public static final String EXCEL_AI_TIMESHEETS_XLSX = PropertiesHelpers.getValue("EXCEL_AI_TIMESHEETS_XLSX");
     public static final String EXCEL_AI_TIMESHEETS_HTML = PropertiesHelpers.getValue("EXCEL_AI_TIMESHEETS_HTML");
     public static final String EXPORT_CAPTURE_EXCEL_PATH = PropertiesHelpers.getValue("EXPORT_CAPTURE_EXCEL_PATH");
-    
+    public static final String ECLIPSE_RUN = PropertiesHelpers.getValue("ECLIPSE_RUN");
+
     
     
     public static final String BROWSER = PropertiesHelpers.getValue("BROWSER");

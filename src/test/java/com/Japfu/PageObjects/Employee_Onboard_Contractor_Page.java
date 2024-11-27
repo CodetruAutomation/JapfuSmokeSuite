@@ -64,7 +64,7 @@ public class Employee_Onboard_Contractor_Page extends CommonPageCICA{
 	private By ssn = By.name("ssn");
 
 
-	private By joiningCalander = By.xpath("//button[@aria-label='Choose date']");
+	private By joiningCalander = By.xpath("//button[@aria-label='Choose date']//*[local-name()='svg']");
 	private By leftArrow = By.xpath("//*[local-name()='svg' and @data-testid='ArrowLeftIcon']");
 	private By joiningDate1 = By.xpath("//button[.='1']");
 
@@ -117,12 +117,14 @@ public class Employee_Onboard_Contractor_Page extends CommonPageCICA{
 
 	private By depositConfiguration = By.xpath("//label[.='Choose Deposit Configuration']/following-sibling::div/input[@role='combobox']");
 	private By fullnet = By.xpath("//li[.='Full Net']");
+	private By UpdatedDOB = By.xpath("//input[@placeholder='MM/DD/YYYY']");
 
 
 	private By finishButton = By.xpath("//button[.='Finish']");
 
 	private By congratulation = By.xpath("//div[.='Congratulations']");
 	private By backTOHome = By.xpath("//button[normalize-space()='Go To Home']");
+	private By okButton = By.xpath("//button[text()='OK']");
 
 	private By zohoCrossMark = By.xpath("//img[contains(@src,'/static/media/cross-mark')]");
 
@@ -276,14 +278,41 @@ public class Employee_Onboard_Contractor_Page extends CommonPageCICA{
 		sendKeys_perform(Keys.ENTER);
 		sleep(0.5);
 		
-		clickElement(joiningCalander);
-		sleep(0.5);
+		try {
+			DriverManager.getDriver().findElement(joiningCalander).isDisplayed();
+			clickElement(joiningCalander);
+			sleep(1);
+			
+			clickElement(leftArrow);
+			sleep(0.5);
+			clickElement(leftArrow);
+			sleep(0.5);
+			clickElement(joiningDate1);
+        }
+		catch(Exception e) {
+
+		clickElement(UpdatedDOB);
+		sleep(2);
 		clickElement(leftArrow);
 		sleep(0.5);
 		clickElement(leftArrow);
-		sleep(0.2);
+		sleep(0.5);
 		clickElement(joiningDate1);
-		sleep(0.5);
+		WebUI.sendKeys_perform(Keys.ENTER);
+		sleep(2);
+		String datevalue = getAttributeElement(UpdatedDOB, "value");
+		System.out.println("Date of Birth = "+datevalue);
+		sleep(1.5);
+		try {
+		clickElement(okButton);
+		}
+		
+		catch(Exception ex)
+		{
+			System.out.println("*******No Ok button Pop up came***********");
+
+		}
+		}
 		//add or remove relation
 		clickElement(employeeUSC);
 		clickElement(employeeyes);

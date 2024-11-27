@@ -155,7 +155,8 @@ public class Employee_Onboard_Consultant_Page extends CommonPageCICA{
 		setText(lastName, lname);
 		sleep(1.5);
 		
-		if (Boolean.valueOf(FrameworkConstants.HEADLESS) == false) {
+		try {
+			DriverManager.getDriver().findElement(joiningCalander).isDisplayed();
 			clickElement(joiningCalander);
 			sleep(1);
 			
@@ -165,7 +166,7 @@ public class Employee_Onboard_Consultant_Page extends CommonPageCICA{
 			sleep(0.5);
 			clickElement(date1);
         }
-		else {
+		catch(Exception e) {
 
 		clickElement(UpdatedDOB);
 		sleep(2);
@@ -183,7 +184,7 @@ public class Employee_Onboard_Consultant_Page extends CommonPageCICA{
 		clickElement(okButton);
 		}
 		
-		catch(Exception e)
+		catch(Exception ex)
 		{
 			System.out.println("*******No Ok button Pop up came***********");
 
@@ -229,41 +230,9 @@ public class Employee_Onboard_Consultant_Page extends CommonPageCICA{
 
 		clickElement(employmentcategory);
 		clickElement(w2);
-//		try {
-//		clickElement(joiningCalander);
-//		sleep(0.5);
-//		clickElement(leftArrow);
-//		sleep(0.5);
-//		clickElement(leftArrow);
-//		sleep(0.2);
-//		clickElement(date1);
-//		sleep(1);
-//		}
-//		catch(Exception e)
-//		{
-//			clickElement(UpdatedDOB);
-//			sleep(2);
-//			clickElement(leftArrow);
-//			sleep(0.5);
-//			clickElement(leftArrow);
-//			sleep(0.5);
-//			clickElement(date1);
-//			WebUI.sendKeys_perform(Keys.ENTER);
-//			sleep(2);
-//			String datevalue = getAttributeElement(UpdatedDOB, "value");
-//			System.out.println("Date of Birth = "+datevalue);
-//			sleep(1.5);
-//			try {
-//			clickElement(okButton);
-//			}
-//			
-//			catch(Exception ex)
-//			{
-//				System.out.println("*******No Ok button Pop up came***********");
-//
-//			}
-//		}
-		if (Boolean.valueOf(FrameworkConstants.HEADLESS) == false) {
+
+		try {
+			DriverManager.getDriver().findElement(joiningCalander).isDisplayed();
 			clickElement(joiningCalander);
 			sleep(1);
 			
@@ -273,7 +242,7 @@ public class Employee_Onboard_Consultant_Page extends CommonPageCICA{
 			sleep(0.5);
 			clickElement(date1);
         }
-		else {
+		catch(Exception e) {
 
 		clickElement(UpdatedDOB);
 		sleep(2);
@@ -291,7 +260,7 @@ public class Employee_Onboard_Consultant_Page extends CommonPageCICA{
 		clickElement(okButton);
 		}
 		
-		catch(Exception e)
+		catch(Exception ex)
 		{
 			System.out.println("*******No Ok button Pop up came***********");
 

@@ -480,7 +480,7 @@
                     <configuration>
                         <suiteXmlFiles>
                             <!--<suiteXmlFile>${suite.all}</suiteXmlFile>-->
-                            <suiteXmlFile>src/test/resources/suites/Individual_Suites/Onboard_Consultant.xml</suiteXmlFile>
+                            <suiteXmlFile>src/test/resources/suites/Individual_Suites/Onboard_Contractor.xml</suiteXmlFile>
                         </suiteXmlFiles>
                         <argLine>
                             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar"
