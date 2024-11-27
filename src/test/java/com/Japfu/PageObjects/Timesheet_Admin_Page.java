@@ -88,14 +88,13 @@ public class Timesheet_Admin_Page {
 
 		for (int i = 0; i <= 10; i++) {
 			sleep(2);
-			clickElement(UpdatedDOB);
+			clickElement(calenderBtn);
 			
 			sleep(1);
 			clickElement(nextIcon);
 			for (int j = 1; j <= 4; j++) {
 				if (shouldBreak) break;  
-				sleep(1);
-				clickElement(okButton);
+
 				sleep(1);
 				int number = 1;
 				int xp;
@@ -111,10 +110,9 @@ public class Timesheet_Admin_Page {
 
 				sleep(1);
 				if (j!= 1) {
-					clickElement(UpdatedDOB);
+					clickElement(calenderBtn);
 					sleep(1);
-					clickElement(okButton);
-					sleep(2);
+					
 				}
 
 				WebElement data1 = DriverManager.getDriver().findElement(By.xpath("//button[text()='" + xp + "']"));
