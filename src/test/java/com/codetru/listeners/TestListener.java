@@ -73,7 +73,7 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
         ExtentReportManager.initReports();
         System.out.println("========= INSTALLED CONFIGURATION DATA =========");
         System.out.println("");
-       //failedTests = new ArrayList<>();
+       failedTests = new ArrayList<>();
 
         LogUtils.info("Starting Suite: " + iSuite.getName());
     }
