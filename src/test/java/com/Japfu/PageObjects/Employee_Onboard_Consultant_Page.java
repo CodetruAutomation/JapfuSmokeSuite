@@ -378,8 +378,8 @@ public class Employee_Onboard_Consultant_Page extends CommonPageCICA{
 
 		clickElement(depositConfiguration);
 		clickElement(fullnet);
-
-		moveToElement(finishButton);
+		sleep(0.5);
+		scrollToElementAtBottom(finishButton);
 		sleep(0.5);
 
 		clickElement(finishButton);
