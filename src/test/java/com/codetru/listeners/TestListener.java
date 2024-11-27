@@ -73,7 +73,7 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
         ExtentReportManager.initReports();
         System.out.println("========= INSTALLED CONFIGURATION DATA =========");
         System.out.println("");
-       failedTests = new ArrayList<>();
+       //failedTests = new ArrayList<>();
 
         LogUtils.info("Starting Suite: " + iSuite.getName());
     }
@@ -125,7 +125,7 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
         ExtentReportManager.addDevices();
         String testTag = iTestResult.getTestContext().getCurrentXmlTest().getName();
         ExtentReportManager.info(BrowserInfoUtils.getOSInfo());
-   //    failedTests = new ArrayList<>();
+       failedTests = new ArrayList<>();
 
         ExtentReportManager.info(testTag);
         if (VIDEO_RECORD.toLowerCase().trim().equals(YES)) {
@@ -152,73 +152,73 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
             screenRecorder.stopRecording(true);
         }
     }
-//    @Override
-//    public void onTestFailure(ITestResult iTestResult) {
-//        LogUtils.error("Test case: " + getTestName(iTestResult) + " is failed.");
-//        count_failedTCs = count_failedTCs + 1;
-//
-//         //   CaptureHelpers.captureScreenshot(DriverManager.getDriver(), getTestName(iTestResult));
-//            ExtentReportManager.addScreenShot(Status.PASS, getTestName(iTestResult));
-//
-//        
-//
-//        if (VIDEO_RECORD.toLowerCase().trim().equals(YES)) {
-//            screenRecorder.stopRecording(true);
-//        }
-//
-//        //Allure report screenshot file and log
-//        LogUtils.error("FAILED !! Screenshot for test case: " + getTestName(iTestResult));
-//        LogUtils.error(iTestResult.getThrowable());
-//
-//        //Extent report screenshot file and log
-//        ExtentReportManager.addScreenShot(Status.FAIL, getTestName(iTestResult));
-//        ExtentReportManager.logMessage(Status.FAIL, iTestResult.getThrowable().toString());
-//
-//        //AllureManager.takeScreenshotToAttachOnAllureReport();
-//        //AllureManager.saveTextLog(iTestResult.getThrowable().toString());
-//
-//    }
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         LogUtils.error("Test case: " + getTestName(iTestResult) + " is failed.");
-        count_failedTCs++;
+        count_failedTCs = count_failedTCs + 1;
 
-        // Ensure the list is initialized
-        if (failedTests == null) {
-            failedTests = new ArrayList<>();
-        }
+         //   CaptureHelpers.captureScreenshot(DriverManager.getDriver(), getTestName(iTestResult));
+            ExtentReportManager.addScreenShot(Status.PASS, getTestName(iTestResult));
 
-        // Capture a screenshot if required
-        String screenshotPath = null;
-        if (SCREENSHOT_FAILED_STEPS.equals(YES)) {
-            screenshotPath = CaptureHelpers.captureScreenshot2(DriverManager.getDriver(), getTestName(iTestResult));
-        }
-
-        // Collect test case name, error details, and screenshot (if any)
-        String failureDetails = "<b><i>" + getTestName(iTestResult) + "</i></b> | Error: " 
-                                + iTestResult.getThrowable();
-        if (screenshotPath != null) {
-            failureDetails += " | <a href='" + screenshotPath + "'>Screenshot</a>";
-        }
-
-        // Add the failure details to the list
         
-        failedTests.add(failureDetails);
-        
+
         if (VIDEO_RECORD.toLowerCase().trim().equals(YES)) {
             screenRecorder.stopRecording(true);
         }
 
-        // Log the failure
+        //Allure report screenshot file and log
         LogUtils.error("FAILED !! Screenshot for test case: " + getTestName(iTestResult));
         LogUtils.error(iTestResult.getThrowable());
 
-        // Add screenshot to Extent Report if applicable
-        if (screenshotPath != null) {
-            ExtentReportManager.addScreenShot(Status.FAIL, screenshotPath);
-        }
+        //Extent report screenshot file and log
+        ExtentReportManager.addScreenShot(Status.FAIL, getTestName(iTestResult));
         ExtentReportManager.logMessage(Status.FAIL, iTestResult.getThrowable().toString());
+
+        //AllureManager.takeScreenshotToAttachOnAllureReport();
+        //AllureManager.saveTextLog(iTestResult.getThrowable().toString());
+
     }
+//    @Override
+//    public void onTestFailure(ITestResult iTestResult) {
+//        LogUtils.error("Test case: " + getTestName(iTestResult) + " is failed.");
+//        count_failedTCs++;
+//
+//        // Ensure the list is initialized
+//        if (failedTests == null) {
+//            failedTests = new ArrayList<>();
+//        }
+//
+//        // Capture a screenshot if required
+//        String screenshotPath = null;
+//        if (SCREENSHOT_FAILED_STEPS.equals(YES)) {
+//            screenshotPath = CaptureHelpers.captureScreenshot2(DriverManager.getDriver(), getTestName(iTestResult));
+//        }
+//
+//        // Collect test case name, error details, and screenshot (if any)
+//        String failureDetails = "<b><i>" + getTestName(iTestResult) + "</i></b> | Error: " 
+//                                + iTestResult.getThrowable();
+//        if (screenshotPath != null) {
+//            failureDetails += " | <a href='" + screenshotPath + "'>Screenshot</a>";
+//        }
+//
+//        // Add the failure details to the list
+//        
+//        failedTests.add(failureDetails);
+//        
+//        if (VIDEO_RECORD.toLowerCase().trim().equals(YES)) {
+//            screenRecorder.stopRecording(true);
+//        }
+//
+//        // Log the failure
+//        LogUtils.error("FAILED !! Screenshot for test case: " + getTestName(iTestResult));
+//        LogUtils.error(iTestResult.getThrowable());
+//
+//        // Add screenshot to Extent Report if applicable
+//        if (screenshotPath != null) {
+//            ExtentReportManager.addScreenShot(Status.FAIL, screenshotPath);
+//        }
+//        ExtentReportManager.logMessage(Status.FAIL, iTestResult.getThrowable().toString());
+//    }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
