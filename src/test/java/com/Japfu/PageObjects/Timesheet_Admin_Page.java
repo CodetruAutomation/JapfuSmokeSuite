@@ -89,13 +89,13 @@ public class Timesheet_Admin_Page {
 		for (int i = 0; i <= 10; i++) {
 			sleep(2);
 			clickElement(UpdatedDOB);
-			sleep(1);
-			clickElement(okButton);
+			
 			sleep(1);
 			clickElement(nextIcon);
 			for (int j = 1; j <= 4; j++) {
 				if (shouldBreak) break;  
-
+				sleep(1);
+				clickElement(okButton);
 				sleep(1);
 				int number = 1;
 				int xp;
