@@ -39,11 +39,12 @@ public class Timesheet_Admin_Page {
 	private By approvedTimesheetpopup = By.xpath("//div[text()='Timesheet Approved!']");
 	private By svgCloseBtn = By.xpath("//*[local-name()='svg' and @data-testid='CloseIcon']//*[local-name()='path']");
 	private By okButton = By.xpath("//button[text()='OK']");
-
+	private By RightArrow = By.xpath("//*[local-name()='svg' and @data-testid='ArrowRightIcon']");
 	private By placementFieldValue = By.xpath("//label[text()='Select Placement ID']/following-sibling::div/input");
 //	private By selectPlacement = By.xpath("//div[text()='Not allowed to approve future timesheets']");
 //	private By placementID = By.xpath("//div[text()='Timesheet Approved!']");
 	private By UpdatedStartDate = By.xpath("//input[@placeholder='MM/DD/YYYY']");
+	private By date1 = By.xpath("//button[text()='1']");
 
 
 
@@ -96,7 +97,14 @@ public class Timesheet_Admin_Page {
 			catch(Exception e)
 			{
 			clickElement(UpdatedStartDate);
-			WebUI.sendKeys_perform(Keys.ENTER);
+		//	WebUI.sendKeys_perform(Keys.ENTER);
+			sleep(1);
+			
+			clickElement(RightArrow);
+			sleep(0.5);
+			clickElement(RightArrow);
+			//sleep(0.5);
+			//clickElement(date1);
 			sleep(2);
 			
 			String datevalue = getAttributeElement(UpdatedStartDate, "value");
@@ -140,6 +148,13 @@ public class Timesheet_Admin_Page {
 					catch(Exception e)
 					{
 					clickElement(UpdatedStartDate);
+					sleep(1);
+					clickElement(RightArrow);
+					sleep(0.5);
+					clickElement(RightArrow);
+				//	sleep(0.5);
+				//	clickElement(date1);
+					sleep(2);
 					WebUI.sendKeys_perform(Keys.ENTER);
 					sleep(2);
 					String datevalue = getAttributeElement(UpdatedStartDate, "value");
