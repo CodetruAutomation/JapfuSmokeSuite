@@ -103,8 +103,8 @@ public class Timesheet_Admin_Page {
 			clickElement(RightArrow);
 			sleep(0.5);
 			clickElement(RightArrow);
-			//sleep(0.5);
-			//clickElement(date1);
+			sleep(0.5);
+			clickElement(date1);
 			sleep(2);
 			
 			String datevalue = getAttributeElement(UpdatedStartDate, "value");
@@ -152,8 +152,8 @@ public class Timesheet_Admin_Page {
 					clickElement(RightArrow);
 					sleep(0.5);
 					clickElement(RightArrow);
-				//	sleep(0.5);
-				//	clickElement(date1);
+					sleep(0.5);
+					clickElement(date1);
 					sleep(2);
 					WebUI.sendKeys_perform(Keys.ENTER);
 					sleep(2);
