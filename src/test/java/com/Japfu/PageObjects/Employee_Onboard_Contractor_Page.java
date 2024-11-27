@@ -419,14 +419,14 @@ public class Employee_Onboard_Contractor_Page extends CommonPageCICA{
 
 		sleep(2);
 
-		String filePath = System.getProperty("user.dir")+"\\src\\test\\resources\\testdataCMS\\I9 Document.jpg";
+		String filePath = System.getProperty("user.dir")+"//src//test//resources//testdataCMS//I9 Document.jpg";
 
 		WebElement fileInput = DriverManager.getDriver().findElement(By.xpath("//input[@type='file']"));
 		sleep(0.5);
 		fileInput.sendKeys(filePath);
 
 		sleep(1);
-		String filePath1 = System.getProperty("user.dir")+"\\src\\test\\resources\\testdataCMS\\W4 form.jpg";
+		String filePath1 = System.getProperty("user.dir")+"//src//test//resources//testdataCMS//W4 form.jpg";
 
 		WebElement fileInput1 = DriverManager.getDriver().findElement(By.xpath("(//input[@type='file'])[2]"));
 		sleep(0.5);
