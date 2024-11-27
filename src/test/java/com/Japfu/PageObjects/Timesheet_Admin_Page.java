@@ -38,6 +38,7 @@ public class Timesheet_Admin_Page {
 	private By approvedTimesheetpopup = By.xpath("//div[text()='Timesheet Approved!']");
 	private By svgCloseBtn = By.xpath("//*[local-name()='svg' and @data-testid='CloseIcon']//*[local-name()='path']");
 	private By UpdatedDOB = By.xpath("//input[@placeholder='MM/DD/YYYY']");
+	private By okButton = By.xpath("//button[text()='OK']");
 
 	private By placementFieldValue = By.xpath("//label[text()='Select Placement ID']/following-sibling::div/input");
 //	private By selectPlacement = By.xpath("//div[text()='Not allowed to approve future timesheets']");
@@ -89,6 +90,8 @@ public class Timesheet_Admin_Page {
 			sleep(2);
 			clickElement(UpdatedDOB);
 			sleep(1);
+			clickElement(okButton);
+			sleep(1);
 			clickElement(nextIcon);
 			for (int j = 1; j <= 4; j++) {
 				if (shouldBreak) break;  
@@ -109,6 +112,8 @@ public class Timesheet_Admin_Page {
 				sleep(1);
 				if (j!= 1) {
 					clickElement(UpdatedDOB);
+					sleep(1);
+					clickElement(okButton);
 					sleep(2);
 				}
 
