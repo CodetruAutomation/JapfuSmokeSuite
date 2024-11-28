@@ -2,6 +2,8 @@ package com.Japfu.PageObjects;
 
 import static com.Japfu.keywords.WebUI.*;
 import org.openqa.selenium.By;
+
+import com.Japfu.driver.DriverManager;
 import com.Japfu.utils.DataGenerateUtils;
 
 
@@ -54,13 +56,21 @@ public class Edit_Employee_Profile {
 			clickElement(Marital_status);
 			sleep(1);
 			
-			try {
-				setText(genderDescription, "Prefer not to say");
-			} catch (Exception e) {
+//			try {
+//				setText(genderDescription, "Prefer not to say");
+//			} catch (Exception e) {
+//
+//				System.out.println("Gender Description is not displayed");
+//			}
 
+			if(DriverManager.getDriver().findElement(genderDescription).isDisplayed())
+			{
+				setText(genderDescription, "Prefer not to say");
+			}
+			else
+			{
 				System.out.println("Gender Description is not displayed");
 			}
-
 			sleep(1);
 			scrollToElementAtBottom(Address1);	
 			clearTextCtrlA(Address1);
