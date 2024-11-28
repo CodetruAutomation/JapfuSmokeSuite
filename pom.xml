@@ -480,7 +480,7 @@
                     <configuration>
                         <suiteXmlFiles>
                             <!--<suiteXmlFile>${suite.all}</suiteXmlFile>-->
-                            <suiteXmlFile>src/test/resources/suites/Individual_Suites/MasterSmokeSuite.xml</suiteXmlFile>
+                            <suiteXmlFile>src/test/resources/suites/MasterSuites/MasterSmokeSuite.xml</suiteXmlFile>
                         </suiteXmlFiles>
                         <argLine>
                             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar"
