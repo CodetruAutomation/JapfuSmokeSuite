@@ -20,7 +20,7 @@ public class Edit_Employee_Profile_Test extends BaseTest {
 	@Test(priority = 3)
 	public void SC_Verify_profile_update_by_employee() throws Exception {
 		getStep_9Page().Update_Employee_Personal_Details();
-		//getLogout_page().Logout();
+		getLogout_page().Logout();
 		
 	}
 

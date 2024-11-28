@@ -9,7 +9,7 @@
       <classes>
       
         	<class name="com.Japfu.testcases.LaunchBrowserTest"/>
-			<!-- <class name="com.Japfu.testcases.Edit_Employee_Profile_Test"/> -->
+			<class name="com.Japfu.testcases.Edit_Employee_Profile_Test"/>
 			<class name="com.Japfu.testcases.Approve_Employee_Profile_Updates_Test"/>           
             
         </classes>

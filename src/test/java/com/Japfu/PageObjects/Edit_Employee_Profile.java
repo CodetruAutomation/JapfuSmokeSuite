@@ -15,7 +15,7 @@ public class Edit_Employee_Profile {
 
 	private By Address1 = By.name("address_line_one");
 	private By Zipcode  = By.name("zip_code");
-	//private By genderDescription = By.name("gender_description");
+	private By genderDescription = By.name("gender_description");
 
 	private By Save_Button = By.xpath("//button[.='Save']");
 
@@ -54,12 +54,12 @@ public class Edit_Employee_Profile {
 			clickElement(Marital_status);
 			sleep(1);
 			
-//			try {
-//				setText(genderDescription, "Prefer not to say");
-//			} catch (Exception e) {
-//
-//				System.out.println("Gender Description is not displayed");
-//			}
+			try {
+				setText(genderDescription, "Prefer not to say");
+			} catch (Exception e) {
+
+				System.out.println("Gender Description is not displayed");
+			}
 
 			sleep(1);
 			scrollToElementAtBottom(Address1);	
