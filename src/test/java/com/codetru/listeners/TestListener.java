@@ -141,7 +141,7 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
 
        
             CaptureHelpers.captureScreenshot(DriverManager.getDriver(), getTestName(iTestResult));
-           ExtentReportManager.addScreenShot(Status.PASS, getTestName(iTestResult));
+       //    ExtentReportManager.addScreenShot(Status.PASS, getTestName(iTestResult));
 
    
 
