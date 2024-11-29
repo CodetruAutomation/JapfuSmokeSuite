@@ -21,7 +21,7 @@ public class Login_Page extends CommonPageCICA {
 		DriverManager.getDriver().findElement(email).sendKeys(Keys.chord(Keys.BACK_SPACE));	
 		clearAndFillText(email, mail);
 		clickElement(submitBtn);
-		sleep(1);
+		sleep(1.5);
 		clickElement(passwordBtn);
 		sleep(1);
 		clearAndFillText(password, pass);
