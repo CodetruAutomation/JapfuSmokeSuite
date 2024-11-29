@@ -3,13 +3,14 @@ package com.Japfu.testcases;
 import org.testng.annotations.Test;
 
 import com.Japfu.Base.BaseTest;
+import com.Japfu.constants.FrameworkConstants;
 
 public class Employee_Onboard_Consultant_Test extends BaseTest {
 
 	
 	 @Test(priority = 1)
 	 public void SC_Verify_Adding_A_New_Consultant_With_Missing_Mandatory_Fields() throws Exception {
-		// getConsultant().verify_Navigating_to_Homepage_Once_click_on_Login();
+		 getLogin().Valid_Admin_Username_Password("nexgen@fhpfhp.fr.nf", FrameworkConstants.PASSWORD);
 		 getConsultant().EmployeeInvalidInformation();
 		 
 	 }

@@ -37,7 +37,7 @@
 	 <test name="Onboard an Employee (Consultant)">
 		<classes>
 			<class name="com.Japfu.testcases.LaunchBrowserTest" />
-			<class name="com.Japfu.testcases.LoginTest" />
+			<!--<class name="com.Japfu.testcases.LoginTest" />-->
 			<class name="com.Japfu.testcases.Employee_Onboard_Consultant_Test" />
 		</classes>
 	</test>
@@ -45,7 +45,7 @@
 	<test name="Onboard an Employee (Contractor)">
 		<classes>
 			<class name="com.Japfu.testcases.LaunchBrowserTest" />
-			<class name="com.Japfu.testcases.LoginTest" />
+			<!--<class name="com.Japfu.testcases.LoginTest" />-->
 			<class name="com.Japfu.testcases.Employee_Onboard_Contractor_Test" />
 		</classes>
 	</test>

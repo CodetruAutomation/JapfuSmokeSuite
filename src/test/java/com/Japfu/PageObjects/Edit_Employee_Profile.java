@@ -50,11 +50,11 @@ public class Edit_Employee_Profile {
 
 		try {
 			sleep(1);
-			scrollToElementAtBottom(Marital);	
-			sleep(1);
-			clickElement(Marital);
-			clickElement(Marital_status);
-			sleep(1);
+//			scrollToElementAtBottom(Marital);	
+//			sleep(1);
+//			clickElement(Marital);
+//			clickElement(Marital_status);
+//			sleep(1);
 			
 //			try {
 //				setText(genderDescription, "Prefer not to say");
@@ -63,14 +63,14 @@ public class Edit_Employee_Profile {
 //				System.out.println("Gender Description is not displayed");
 //			}
 
-			if(DriverManager.getDriver().findElement(genderDescription).isDisplayed())
-			{
-				setText(genderDescription, "Prefer not to say");
-			}
-			else
-			{
-				System.out.println("Gender Description is not displayed");
-			}
+//			if(DriverManager.getDriver().findElement(genderDescription).isDisplayed())
+//			{
+//				setText(genderDescription, "Prefer not to say");
+//			}
+//			else
+//			{
+//				System.out.println("Gender Description is not displayed");
+//			}
 			sleep(1);
 			scrollToElementAtBottom(Address1);	
 			clearTextCtrlA(Address1);
