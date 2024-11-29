@@ -49,69 +49,72 @@ public class Timesheet_AI_Page extends CommonPageCICA {
 	private By svgCloseBtn = By.xpath("//*[local-name()='svg' and @data-testid='CloseIcon']//*[local-name()='path']");
 	
 	
+private By HarnessingLoading = By.xpath("//div[contains(text(),'Harnessing')]");
+	
+	
 	public void openTimesheetsPage() {
 		sleep(2);
 		clickElement(timesheet);
 		sleep(1);
 	}
-	
-	
-
+ 
 	public void AI_TimesheetsVerification() throws Exception {
 		
 		clickElement(viewBtn);
 		sleep(1);
-
+ 
 		String creditsLeft = Reusablemethods.PickNumerics(getTextElement(creditsCount));
 		int number = Integer.parseInt(creditsLeft);
 		System.out.println("The Total Credits left is - "+number);
-
+ 
 		if(number >= 1) {
-
+ 
 			String employeeName = getTextElement(empName);
-
+ 
 			ExcelHelpers exc = new ExcelHelpers();
 			exc.setExcelFile(FrameworkConstants.EXCEL_AI_TIMESHEETS_XLSX, "AI_Timesheets");
 			exc.setCellData(employeeName, 5, 3);
 			sleep(2);
-
+ 
 			scrollToPageBottom();
 			sleep(1);
 			List<WebElement> tablerow = getWebElements(timesheetTable);
 			System.out.println("Table Size = "+tablerow.size());
-
+ 
 			for (int i =2; i<tablerow.size(); i++) {
 				int count = i-1;
-
+ 
 				By columnText = By.xpath("(//tr[contains(@class,'MuiTableRow-head')])/th["+i+"]/div[2]");
 				System.out.println("Day -"+count+"-"+getTextElement(columnText));
 				exc.setCellData(getTextElement(columnText),i+7 , 2);
-
+ 
 			}
 			sleep(2);
-
+ 
 			exc.convertExcelToHtml(FrameworkConstants.EXCEL_AI_TIMESHEETS_XLSX, FrameworkConstants.EXCEL_AI_TIMESHEETS_HTML);
 			sleep(1);
 			openNewTab();
 			sleep(1);
 			DriverManager.getDriver().get(new File(FrameworkConstants.EXCEL_AI_TIMESHEETS_HTML).toURI().toString());
-
+ 
 			sleep(1);
-
+ 
 			takeFullPageScreenshotWithoutDate("AI_sheet_SS");
 			sleep(2);
-
+ 
 			switchToMainWindow();
 			sleep(1);
-
+ 
 			String filePath = System.getProperty("user.dir")+"//src//test//resources//testdataCMS//AI_Timesheet_SS//AI_sheet_SS.png";
 			WebElement fileInput = DriverManager.getDriver().findElement(By.xpath("//input[@type='file']"));
 			sleep(1);
 			fileInput.sendKeys(filePath);
 			sleep(2);
 			clickElement(captureTimesheet);
-			sleep(8);
-
+			sleep(2);
+			
+			spinnerWaitWithTime(HarnessingLoading, 30);
+			sleep(2);
 			try {
 				verifyElementVisible(doneButton);
 				sleep(2);
@@ -127,26 +130,26 @@ public class Timesheet_AI_Page extends CommonPageCICA {
 				}else {
 					printStatement("Timesheet Submision Status - ", "Unable to Submit AI Timesheet");
 				}
-
+ 
 			} catch (Exception e) {
-
+ 
 				if(verifyElementDisplayed(errorPopup)){
 					printStatement("Image upload response - ", getTextElement(errorPopup));
-
+ 
 				}else if(verifyElementDisplayed(mismatchAlert)) {
 					clickElement(okayButton);
-
+ 
 				}else if(verifyElementDisplayed(oopsPopup)){
 					clickElement(okButton);
-				} 
-
+				}
+ 
 			}
-
+ 
 		} else {
-
+ 
 			printStatement("Credits left: ", number+" - "+"Insufficient Credits");
 			printStatement("-----------******-----------", "-----------******-----------");
-
+ 
 		}
 	}
 

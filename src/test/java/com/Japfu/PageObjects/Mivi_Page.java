@@ -36,7 +36,8 @@ public class Mivi_Page extends CommonPageCICA {
 	private By miviIcon = By.xpath("//div[text()='Mivi']");
 	private By creditsCount = By.xpath("//div[text()='AI Prompts']/preceding-sibling::div");
 	private By mivichatfield = By.name("message");
-	
+	private By HarnessingLoading = By.xpath("//div[contains(text(),'Harnessing')]");
+
 	public void Mivi_Chatbox_interaction() {
 
 		clickElement(timesheet);
@@ -73,7 +74,7 @@ public class Mivi_Page extends CommonPageCICA {
 
 		if(number > 4) {
 			if(verifyElementDisplayed(miviIcon)) {
-				
+
 				printStatement("Verify user able to open MIVI chat bot page - ", "User is on mivi page");	
 			}else {
 				printStatement("Verify user able to open MIVI chat bot page - ", "User unable to navigate to the mivi page");
@@ -83,7 +84,11 @@ public class Mivi_Page extends CommonPageCICA {
 			setText(mivichatfield, "How many timesheets are drafted");
 			sleep(1);
 			clickElement(sendIcon);
-			sleep(5);
+			sleep(2);
+
+			spinnerWaitWithTime(HarnessingLoading, 30);
+			sleep(2);
+
 			String data1 = Reusablemethods.PickNumerics(getTextElement(miviResponse));
 			if(verifyElementDisplayed(miviResponse) && data1.equals(TotalcountOfApprovedTimesheets))  {
 				printStatement("Verify MIVI Response - ", "Acual timesheets count and MIVI Response count Matched");

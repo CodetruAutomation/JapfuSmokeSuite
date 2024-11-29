@@ -3743,6 +3743,20 @@ public class WebUI {
 
 	}
 
+	// Spinner wait with 30 secs max wait
+		public static void spinnerWaitWithTime(By locator, int maxWaitTimeInSecs) {
+			try {
+				for (int wt = 0; wt <= maxWaitTimeInSecs; wt++) {
+					if (DriverManager.getDriver().findElement(locator).isDisplayed()) {
+						WebUI.sleep(1);
+	 
+					}
+				}
+	 
+			} catch (Exception ex) {
+				System.out.println("Element Displayed");
+			}
+		}
 
 
 }
